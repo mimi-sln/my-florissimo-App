@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./App.css";
-import ProductCart from "./ProductCart";
+import ProductContainer from "./ProductCart";
+
 const productArray = [
   {
     id: 1,
@@ -14,21 +15,36 @@ const productArray = [
     name: "codiaeum",
     price: "CHF 29.90",
     image: "https://images.unsplash.com/photo-1602668080102-eb805a0daa76?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
-    description: "a.k.a croton plant",
+    description: "a.k.a croton plant keeps you happy with its bright colors",
   },
   {
     id: 3,
+    name: "mammillaria guelzowiana",
+    price: "CHF 19.90",
+    image: "https://images.unsplash.com/photo-1509587584298-0f3b3a3a1797?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=826&q=80",
+    description: "a fun globe-shaped cactus that's covered in spines and blooms with attractive, fragrant bright pink flowers",
+  },
+  {
+    id: 4,
     name: "lime",
-    price: "CHF 29.90",
+    price: "CHF 99.90",
     image: "https://images.unsplash.com/photo-1653600015318-19bd60546c44?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80",
     description: "organic home-made",
   },
   {
-    id: 4,
+    id: 5,
     name: "limone",
-    price: "CHF 29.90",
+    price: "CHF 99.90",
     image: "https://images.unsplash.com/photo-1432457990754-c8b5f21448de?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
     description: "the refresher",
+  },
+  
+  {
+    id: 6,
+    name: "peach",
+    price: "CHF 89.90",
+    image: "https://images.unsplash.com/photo-1438274754346-45322cac87e4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80",
+    description: "the vitamin bomb",
   },
 ];
 
@@ -37,12 +53,16 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Florissimo</h1>
-      <h2>The Flower Shop</h2>
-      <h3 className="shopping cart">shopping cart: {count}</h3>
-      <div className="shopping-list">
+      <img className="banner" src="https://images.unsplash.com/photo-1531058240690-006c446962d8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"/>
+      <div className="header">
+      <h3 className="basket">you are taking home {count} plants.</h3>
+      </div>
+
+      <h1 id="shopname">FLORISSIMO</h1>
+      <h2 id="subtitle">The Flower Shop</h2>
+      <div className="gridSelection">
         {productArray.map((product) => 
-          <ProductCart
+          <ProductContainer
             product={product}
             setCount={setCount}
             count={count}

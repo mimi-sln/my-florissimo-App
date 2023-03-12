@@ -1,6 +1,6 @@
 import { useState } from "react";
-import "./App.css";
-import ProductContainer from "./ProductCart";
+import './index.css'
+import ProductContainer from "./components/ProductCart";
 
 const productArray = [
   {
@@ -49,15 +49,14 @@ const productArray = [
 ];
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [countArticles, setCount] = useState(0);
 
   return (
     <div className="App">
       <img className="banner" src="https://images.unsplash.com/photo-1531058240690-006c446962d8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"/>
       <div className="header">
-      <h3 className="basket">you are taking home {count} plants.</h3>
+      <h3 className="basket">you are taking home {countArticles} plants.</h3>
       </div>
-
       <h1 id="shopname">FLORISSIMO</h1>
       <h2 id="subtitle">The Flower Shop</h2>
       <div className="gridSelection">
@@ -65,7 +64,7 @@ function App() {
           <ProductContainer
             product={product}
             setCount={setCount}
-            count={count}
+            count={countArticles}
             key={product.id}
           />
         )}

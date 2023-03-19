@@ -1,16 +1,11 @@
+body {
+  margin: 0;
+}
 :root {
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+  margin: 0 auto;
+  text-align: center;
 }
 
 a {
@@ -22,14 +17,6 @@ a:hover {
   color: #535bf2;
 }
 
-body {
-  margin: 0;
-  /*  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;*/
-}
-
 button:hover {
   border-color: #646cff;
 }
@@ -38,40 +25,48 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-h1,
-h2,
-h3,
-h4 {
+h1, h2, h3, h4 {
   font-family: "Poppins", "Times New Roman", Times, serif;
 }
-
-.banner {
-  width: 1280px;
-  object-fit: cover;
-  height: 250px;
+.App{
+  height: 25vh;
+  background-image: url("https://images.unsplash.com/photo-1536607751799-9636d99d4305?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80");
+  background-repeat: repeat;
+  background-color: #242424;  
+  
 }
 
 .header {
   display: flex;
-}
+  flex-flow: row-reverse;
+ justify-content: space-between;
+  font-size: 48px;
+  }
 
 #shopname {
-  font-size: 40px;
+  font-size: 136px;
   font-weight: 300;
 }
 
 #subtitle {
   font-size: 72px;
   font-weight: 300;
+  margin-bottom: 0;
+}
+
+.monthlyHits {
+  height: 40vh;
+  background-color: #e2ffe6;
+  color: black;
+
+}
+.monthlyHits > h2 {
+  font-size: 72px;
+  font-weight: 300;
 }
 
 .gridSelection {
+  margin: 100px;
   display: grid;
   gap: 30px;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));

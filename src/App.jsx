@@ -1,76 +1,42 @@
 import { useState } from "react";
 import './index.css'
-import ProductContainer from "./components/ProductCart";
+import {createBrowserRouter, RouterProvider, Route, Link,  useParams, createRoutesFromElements} from "react-router-dom";
 
-const productArray = [
-  {
-    id: 1,
-    name: "calathea",
-    price: "CHF 29.90",
-    image: "https://images.unsplash.com/photo-1597055181321-71de4e5ec627?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80",
-    description: "the living tree",
-  },
-  {
-    id: 2,
-    name: "codiaeum",
-    price: "CHF 29.90",
-    image: "https://images.unsplash.com/photo-1602668080102-eb805a0daa76?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
-    description: "a.k.a croton plant keeps you happy with its bright colors",
-  },
-  {
-    id: 3,
-    name: "mammillaria guelzowiana",
-    price: "CHF 19.90",
-    image: "https://images.unsplash.com/photo-1509587584298-0f3b3a3a1797?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=826&q=80",
-    description: "a fun globe-shaped cactus that's covered in spines and blooms with attractive, fragrant bright pink flowers",
-  },
-  {
-    id: 4,
-    name: "lime",
-    price: "CHF 99.90",
-    image: "https://images.unsplash.com/photo-1653600015318-19bd60546c44?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80",
-    description: "organic home-made",
-  },
-  {
-    id: 5,
-    name: "limone",
-    price: "CHF 99.90",
-    image: "https://images.unsplash.com/photo-1432457990754-c8b5f21448de?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-    description: "the refresher",
-  },
-  
-  {
-    id: 6,
-    name: "peach",
-    price: "CHF 89.90",
-    image: "https://images.unsplash.com/photo-1438274754346-45322cac87e4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80",
-    description: "the vitamin bomb",
-  },
-];
+import productArray from "./data";
+import RootLayout from "./layouts/RootLayout"
+import ShoppingCart from "./components/shoppingCart";
+import AboutPage from "./pages/AboutPage";
+import ProductPage from "./pages/ProductPage";
+import ProductList from  "./components/ProductList";
 
-function App() {
+function App() 
+{
   const [countArticles, setCount] = useState(0);
+  const [cartItems, setCartItems] = useState([])
 
+  const addItem = (product) => {
+    setCartItems([...cartItems, product])
+  }
+  const removeItem = (id) => {
+    setCartItems(
+      cartItems.filter((cartItem)=> cartItem.id !== id )
+    )
+  }
+
+  const routerArray = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path='/' element={<RootLayout totalItems={cartItems.length}/>} >
+        <Route index element={ <ProductList addItem={addItem}  products={productArray} count={countArticles} setCount={setCount} /> } /> 
+        <Route path='about' element={<AboutPage/>}/>
+        <Route path='cart' element={<ShoppingCart cartItems={cartItems} removeItem={removeItem}/>}/> 
+        <Route path='product/:id/' element={<ProductPage products={productArray} addItem={addItem} />}/>
+        </Route>
+    )
+  )
   return (
-    <div className="App">
-      <img className="banner" src="https://images.unsplash.com/photo-1531058240690-006c446962d8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"/>
-      <div className="header">
-      <h3 className="basket">you are taking home {countArticles} plants.</h3>
-      </div>
-      <h1 id="shopname">FLORISSIMO</h1>
-      <h2 id="subtitle">The Flower Shop</h2>
-      <div className="gridSelection">
-        {productArray.map((product) => 
-          <ProductContainer
-            product={product}
-            setCount={setCount}
-            count={countArticles}
-            key={product.id}
-          />
-        )}
-      </div>
-    </div>
-  );
-}
-
-export default App
+    <RouterProvider router={routerArray} />
+   );
+ }
+ 
+ export default App
+  
